@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Text, View } from "react-native";
-import { TextInput, Button,Subheading } from "react-native-paper";
+import React, { useState, useEffect } from "react";
+import { Text, View, BackHandler } from "react-native";
+import { TextInput, Button, Subheading } from "react-native-paper";
 import firebase from "firebase/app";
 import { useNavigation } from "@react-navigation/native";
 
@@ -8,10 +8,15 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const navigation = useNavigation();
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", function () {
+      return true;
+    });
+  }, []);
+
   const createAccount = async () => {
     setIsLoading(true);
     try {
@@ -23,7 +28,7 @@ const SignUp = () => {
       navigation.popToTop();
     } catch (e) {
       setIsLoading(false);
-        setError(e.message);
+      setError(e.message);
     }
   };
   return (
@@ -45,12 +50,14 @@ const SignUp = () => {
         value={email}
         onChangeText={(text) => setEmail(text)}
         style={{ marginTop: 12 }}
+        keyboardType="email-address"
       />
       <TextInput
         label="Password"
         value={password}
         onChangeText={(text) => setPassword(text)}
         style={{ marginTop: 12 }}
+        secureTextEntry
       />
       <View
         style={{
@@ -59,7 +66,9 @@ const SignUp = () => {
           marginTop: 16,
         }}
       >
-        <Button compact>SIGN IN</Button>
+        <Button compact onPress={() => navigation.navigate("SignIn")}>
+          SIGN IN
+        </Button>
         <Button
           mode="contained"
           onPress={() => createAccount()}

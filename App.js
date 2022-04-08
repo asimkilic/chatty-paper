@@ -10,7 +10,6 @@ import SignUp from './screens/SignUp';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { Provider } from 'react-native-paper';
-
 import firebase from "firebase/app";
 
 
@@ -42,10 +41,12 @@ const Tabs = createBottomTabNavigator();
 const TabsNavigator = () => {
   const navigation = useNavigation();
   useEffect(() => {
-    const isLoggedIn = false;
-    if (!isLoggedIn) {
-      navigation.navigate('SignUp');
-    }
+    firebase.auth().onAuthStateChanged(user => {
+      if (!user) {
+        navigation.navigate('SignUp')
+      }
+    })
+
   }, [])
   return (
     <Tabs.Navigator
@@ -64,17 +65,15 @@ const TabsNavigator = () => {
 
 
 const App = () => {
-  useEffect(()=>{
-    BackHandler.addEventListener('hardwareBackPress', function () { return true })
-  },[])
+ 
   return (
     <NavigationContainer>
       <Provider>
         <Stack.Navigator>
           <Stack.Screen name="Main" component={TabsNavigator} options={{ headerShown: false }} />
           <Stack.Screen name="Chat" component={Chat} />
-          <Stack.Screen name="SignIn" component={SignIn} options={{ presentation: 'fullScreenModal' }} />
-          <Stack.Screen name="SignUp" component={SignUp} options={{ presentation: 'fullScreenModal', headerBackVisible:false}} 
+          <Stack.Screen name="SignIn" component={SignIn} options={{ presentation: 'fullScreenModal', headerBackVisible: false  }} />
+          <Stack.Screen name="SignUp" component={SignUp} options={{ presentation: 'fullScreenModal', headerBackVisible: false }}
           />
         </Stack.Navigator>
       </Provider>

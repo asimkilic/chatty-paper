@@ -9,12 +9,22 @@ import SignIn from './screens/SignIn';
 import SignUp from './screens/SignUp';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import { Provider } from 'react-native-paper';
+import { Provider,DefaultTheme } from 'react-native-paper';
 import firebase from "firebase/app";
 
 
 import 'firebase/auth';
 import 'firebase/firestore';
+
+const theme = {
+  ...DefaultTheme,
+  roundness: 2,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#2196f3',
+    accent: '#e91e63',
+  },
+};
 
 // Your web app's Firebase configuration
 
@@ -68,7 +78,7 @@ const App = () => {
  
   return (
     <NavigationContainer>
-      <Provider>
+      <Provider theme={theme}>
         <Stack.Navigator>
           <Stack.Screen name="Main" component={TabsNavigator} options={{ headerShown: false }} />
           <Stack.Screen name="Chat" component={Chat} />

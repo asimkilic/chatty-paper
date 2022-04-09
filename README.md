@@ -1,5 +1,8 @@
 # Chatty-Paper
 
+<p align="right"><a href="#screens">Ekran Görüntüleri >></a></p>
+
+
 
 Proje oluşturulması:
 
@@ -68,3 +71,14 @@ yarn add react-native-gifted-chat
 
 [ionic.io](https://ionic.io/ionicons)
 
+
+
+## Screens
+
+<div id="screens"></div>
+<img src="https://raw.githubusercontent.com/asimkilic/chatty-paper/master/assets/SignUp.jpeg" />
+<img src="https://raw.githubusercontent.com/asimkilic/chatty-paper/master/assets/SignIn.jpeg" />
+<img src="https://raw.githubusercontent.com/asimkilic/chatty-paper/master/assets/SignOut.jpeg" />
+<img src="https://raw.githubusercontent.com/asimkilic/chatty-paper/master/assets/NewChat.jpeg" />
+<img src="https://raw.githubusercontent.com/asimkilic/chatty-paper/master/assets/ChatDetail.jpeg" />
+<img src="https://raw.githubusercontent.com/asimkilic/chatty-paper/master/assets/ChatList.jpeg" />
